@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class User(models.Model):
@@ -70,25 +71,26 @@ class Merch(models.Model):
         verbose_name_plural = 'merches'
         ordering = ['id']
       
-class ArtistsXSongs(models.Model):
-    id = models.AutoField(primary_key=True)
-    id_artist = models.ForeignKey(Artists,on_delete= models.CASCADE)
-    class Meta:
-        db_table ='artistsxsongs'
-        verbose_name = 'artistxsong'
-        verbose_name_plural = 'artistsxsongs'
-        ordering = ['id']
+
 class Songs(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=150,null=False, blank=False)
-    file = = models.FileField(upload_to='docs/')
+    file = models.FileField(upload_to='docs/')
     def __str__(self):
         return self.name
-    
     class Meta:
         db_table = 'songs'
         verbose_name = 'song'
         verbose_name_plural = 'songs'
+        ordering = ['id']
+class ArtistsXSongs(models.Model):
+    id = models.AutoField(primary_key=True)
+    id_artist = models.ForeignKey(Artists,on_delete= models.CASCADE)
+    id_song = models.ForeignKey(Songs, on_delete = models.CASCADE)
+    class Meta:
+        db_table ='artistsxsongs'
+        verbose_name = 'artistxsong'
+        verbose_name_plural = 'artistsxsongs'
         ordering = ['id']
              
 class Playlists(models.Model):
@@ -129,3 +131,8 @@ class TagsxSongs(models.Model):
     id = models.AutoField(primary_key=True)
     id_song = models.ForeignKey(Songs,on_delete= models.CASCADE)
     id_tag = models.ForeignKey(Tags,on_delete= models.CASCADE)
+    class Meta :
+        db_table = 'tagsxsongs'
+        verbose_name = 'tagxsongs'
+        verbose_name_plural = 'tagsxsongs'
+        ordering = ['id']
