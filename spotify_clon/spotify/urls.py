@@ -1,62 +1,20 @@
-from rest_framework import viewsets, routers
-from .models import User, Artists, Events, EventsxArtist, Merch, ArtistsXSongs, Songs, Playlists, SongsXlists, Tags, TagsxSongs
-from .serializers import UserSerializer, ArtistSerializer, EventSerializer, EventxArtistSerializer, MerchSerializer, ArtistxSongSerializer, SongSerializer, PlaylistSerializer, SongxListSerializer, TagSerializer, TagxSongSerializer
-
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-
-class ArtistViewSet(viewsets.ModelViewSet):
-    queryset = Artists.objects.all()
-    serializer_class = ArtistSerializer
-
-class EventViewSet(viewsets.ModelViewSet):
-    queryset = Events.objects.all()
-    serializer_class = EventSerializer
-
-class EventxArtistViewSet(viewsets.ModelViewSet):
-    queryset = EventsxArtist.objects.all()
-    serializer_class = EventxArtistSerializer
-
-class MerchViewSet(viewsets.ModelViewSet):
-    queryset = Merch.objects.all()
-    serializer_class = MerchSerializer
-
-class ArtistxSongViewSet(viewsets.ModelViewSet):
-    queryset = ArtistsXSongs.objects.all()
-    serializer_class = ArtistxSongSerializer
-
-class SongViewSet(viewsets.ModelViewSet):
-    queryset = Songs.objects.all()
-    serializer_class = SongSerializer
-
-class PlaylistViewSet(viewsets.ModelViewSet):
-    queryset = Playlists.objects.all()
-    serializer_class = PlaylistSerializer
-
-class SongxListViewSet(viewsets.ModelViewSet):
-    queryset = SongsXlists.objects.all()
-    serializer_class = SongxListSerializer
-
-class TagViewSet(viewsets.ModelViewSet):
-    queryset = Tags.objects.all()
-    serializer_class = TagSerializer
-
-class TagxSongViewSet(viewsets.ModelViewSet):
-    queryset = TagsxSongs.objects.all()
-    serializer_class = TagxSongSerializer
-
+from django.urls import path,include 
+from rest_framework import routers
+from . import views
 router = routers.DefaultRouter()
-router.register('users', UserViewSet, basename='user')
-router.register('artists', ArtistViewSet, basename='artist')
-router.register('events', EventViewSet, basename='event')
-router.register('eventsxartists', EventxArtistViewSet, basename='eventxartist')
-router.register('merchs', MerchViewSet, basename='merch')
-router.register('artistsxsongs', ArtistxSongViewSet, basename='artistxsong')
-router.register('songs', SongViewSet, basename='song')
-router.register('playlists', PlaylistViewSet, basename='playlist')
-router.register('songsxlists', SongxListViewSet, basename='songxlist')
-router.register('tags', TagViewSet, basename='tag')
-router.register('tagsxsongs', TagxSongViewSet, basename='tagxsong')
+router.register(r'users', views.UserViewSet, basename='user')
+router.register(r'artists', views.ArtistViewSet, basename='artist')
 
-urlpatterns = router.urls
+router.register(r'events', views.EventViewSet, basename='event')
+router.register(r'eventsxartists',views.EventxArtistViewSet, basename='eventxartist')
+router.register(r'merchs', views.MerchViewSet, basename='merch')
+router.register(r'artistsxsongs', views.ArtistxSongViewSet, basename='artistxsong')
+router.register(r'songs', views.SongViewSet, basename='song')
+router.register(r'playlists', views.PlaylistViewSet, basename='playlist')
+router.register(r'songsxlists', views.SongxListViewSet, basename='songxlist')
+router.register(r'tags', views.TagViewSet, basename='tag')
+router.register(r'tagsxsongs', views.TagxSongViewSet, basename='tagxsong')
+
+urlpatterns = [
+    path('',include(router.urls))
+]

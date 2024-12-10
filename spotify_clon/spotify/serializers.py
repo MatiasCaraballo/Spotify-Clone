@@ -5,7 +5,7 @@ from .models import User, Artists, Events, EventsxArtist, Merch, ArtistsXSongs, 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'phone_number', 'password']
+        fields = ['id','username','email','phone_number','password']
         def create(self, validated_data): 
             user = User(**validated_data) 
             user.set_password(validated_data['password']) 
@@ -19,49 +19,49 @@ class UserSerializer(serializers.ModelSerializer):
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artists
-        fields = ['id', 'name']
+        fields = ['__all__']
 
 class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Events
-        fields = ['id', 'name', 'place', 'start_time']
+        fields = ['__all__']
 
 class EventxArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventsxArtist
-        fields = ['id', 'id_event', 'id_artist']
+        fields = ['__all__']
 
 class MerchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Merch
-        fields = ['id', 'name', 'price', 'id_artist']
+        fields = ['__all__']
 
 class ArtistxSongSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtistsXSongs
-        fields = ['id', 'id_artist','id_song']
+        fields = ['__all__']
 
 class SongSerializer(serializers.ModelSerializer):
     class Meta:
         model = Songs
-        fields = ['id', 'name', 'file']
+        fields = ['__all__']
 
 class PlaylistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Playlists
-        fields = ['id', 'name', 'description', 'id_user']
+        fields = ['__all__']
 
 class SongxListSerializer(serializers.ModelSerializer):
     class Meta:
         model = SongsXlists
-        fields = ['id', 'id_song', 'id_playlist']
+        fields = ['__all__']
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tags
-        fields = ['id', 'content']
+        fields = ['__all__']
 
 class TagxSongSerializer(serializers.ModelSerializer):
     class Meta:
         model = TagsxSongs
-        fields = ['id', 'id_song', 'id_tag']
+        fields = ['__all__']

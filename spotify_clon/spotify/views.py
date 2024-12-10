@@ -1,12 +1,68 @@
-from django.shortcuts import render
+#
 
 # Create your views here.
-from django.http import JsonResponse
-from django.views import View
+from rest_framework import viewsets
 from .models import User, Artists, Events, EventsxArtist, Merch, ArtistsXSongs, Songs, Playlists, SongsXlists, Tags, TagsxSongs
-from django.shortcuts import get_object_or_404
+from .serializers import UserSerializer, ArtistSerializer, EventSerializer, EventxArtistSerializer, MerchSerializer, ArtistxSongSerializer, SongSerializer, PlaylistSerializer, SongxListSerializer, TagSerializer, TagxSongSerializer
+from django.shortcuts import render
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+class ArtistViewSet(viewsets.ModelViewSet):
+    queryset = Artists.objects.all()
+    serializer_class = ArtistSerializer
+
+class EventViewSet(viewsets.ModelViewSet):
+    queryset = Events.objects.all()
+    serializer_class = EventSerializer
+
+class EventxArtistViewSet(viewsets.ModelViewSet):
+    queryset = EventsxArtist.objects.all()
+    serializer_class = EventxArtistSerializer
+
+class MerchViewSet(viewsets.ModelViewSet):
+    queryset = Merch.objects.all()
+    serializer_class = MerchSerializer
+
+class ArtistxSongViewSet(viewsets.ModelViewSet):
+    queryset = ArtistsXSongs.objects.all()
+    serializer_class = ArtistxSongSerializer
+
+class SongViewSet(viewsets.ModelViewSet):
+    queryset = Songs.objects.all()
+    serializer_class = SongSerializer
+
+class PlaylistViewSet(viewsets.ModelViewSet):
+    queryset = Playlists.objects.all()
+    serializer_class = PlaylistSerializer
+
+class SongxListViewSet(viewsets.ModelViewSet):
+    queryset = SongsXlists.objects.all()
+    serializer_class = SongxListSerializer
+
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tags.objects.all()
+    serializer_class = TagSerializer
+
+class TagxSongViewSet(viewsets.ModelViewSet):
+    queryset = TagsxSongs.objects.all()
+    serializer_class = TagxSongSerializer
+
+#WORK WITH TEMPLATES
+def home(request):
+    return render(request,'index.html')
+
+'''
+
+
+class index():
+    def return_index(self):
+        return render('index.html')
 
 # Vistas para User
+
 class UserList(View):
     def get(self, request):
         users = list(User.objects.values())
@@ -69,23 +125,18 @@ class EventDetail(View):
         return JsonResponse({'id': event.id, 'name': event.name, 'place': event.place, 'start_time': event.start_time})
 
     def put(self, request, pk):
-        # Lógica para actualizar un evento
         pass
 
     def delete(self, request, pk):
-        # Lógica para eliminar un evento
         pass
 
-# Sigue con EventsxArtist, Merch, ArtistsXSongs, Songs, Playlists, SongsXlists, Tags, TagsxSongs
 
-# Ejemplo para Merch
 class MerchList(View):
     def get(self, request):
         merches = list(Merch.objects.values())
         return JsonResponse(merches, safe=False)
 
     def post(self, request):
-        # Lógica para crear un nuevo merch
         pass
 
 class MerchDetail(View):
@@ -94,9 +145,8 @@ class MerchDetail(View):
         return JsonResponse({'id': merch.id, 'name': merch.name, 'price': merch.price, 'id_artist': merch.id_artist_id})
 
     def put(self, request, pk):
-        # Lógica para actualizar un merch
         pass
 
     def delete(self, request, pk):
-        # Lógica para eliminar un merch
         pass
+'''

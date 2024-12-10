@@ -16,18 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from spotify.views import home 
 
 urlpatterns = [
+   # path('intl-en/',index.return_index),
     path('admin/', admin.site.urls),
-    path('',include('spotify.urls'))
+    path('',include('spotify.urls')),
+    path('intl-en/',home,name="home"),
     
 ]
 
-'''
-urlpatterns = [
-    path('',include('core.urls')),
-    path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-
-]
-'''
