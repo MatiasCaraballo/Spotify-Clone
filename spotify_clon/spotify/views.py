@@ -53,7 +53,10 @@ class TagxSongViewSet(viewsets.ModelViewSet):
 #WORK WITH TEMPLATES
 def home(request):
     return render(request,'index.html')
-
+def sign_in(request):
+    return render(request,'sign-in.html')
+def login(request):
+    return render(request,'login.html')
 '''
 
 
